@@ -1,12 +1,11 @@
 import { createStaticNavigation } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import BasicLayout from '@/components/layout/BasicLayout'
 import FavoriteScreen from '@/Screens/FavoriteScreen'
 import HomeScreen from '@/Screens/HomeScreen'
 import JokeScreen from '@/Screens/JokeScreen'
 import LoginScreen from '@/Screens/LoginScreen'
-import SignoutScreen from '@/Screens/SignoutScreen'
+import SignupScreen from '@/Screens/SignupScreen'
 
 const RootStack = createNativeStackNavigator({
 	initialRouteName: 'Login',
@@ -18,7 +17,7 @@ const RootStack = createNativeStackNavigator({
 		Favorite: { screen: FavoriteScreen },
 		Joke: { screen: JokeScreen },
 		Login: { screen: LoginScreen },
-		signout: { screen: SignoutScreen },
+		Signup: { screen: SignupScreen },
 	},
 })
 

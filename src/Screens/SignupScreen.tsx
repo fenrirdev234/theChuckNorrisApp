@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
 import {
+	Alert,
 	StyleSheet,
 	Text,
 	TextInput,
@@ -10,18 +11,21 @@ import {
 
 import LogLayout from '@/components/layout/LogLayout'
 
-export default function LoginScreen() {
+export default function SignupScreen() {
 	const navigation = useNavigation()
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+	const [loading, setLoading] = useState(false)
 
-	const onHandleLogin = () => {}
+	const onHandleLogin = () => {
+		if (email !== '' && password !== '') {
+			setLoading(true)
+		}
+	}
 
 	return (
 		<LogLayout>
-			<Text style={styles.title} className='text pb-[24] font-bold'>
-				Log In
-			</Text>
+			<Text style={styles.title}>Sign up</Text>
 			<TextInput
 				style={styles.input}
 				placeholder='Enter email'
@@ -42,12 +46,8 @@ export default function LoginScreen() {
 				value={password}
 				onChangeText={(text) => setPassword(text)}
 			/>
-			<TouchableOpacity
-				style={styles.button}
-				className='bg-buttonBg'
-				onPress={onHandleLogin}
-			>
-				<Text className='text-button-text-color font-bold' style={{ fontSize: 18 }}>
+			<TouchableOpacity style={styles.button} onPress={onHandleLogin}>
+				<Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 18 }}>
 					{' '}
 					Log In
 				</Text>
@@ -63,8 +63,11 @@ export default function LoginScreen() {
 				<Text style={{ color: 'gray', fontWeight: '600', fontSize: 14 }}>
 					Don't have an account?{' '}
 				</Text>
-				<TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-					<Text className='text-buttonBg text-{14} font-semibold'> Sign Up</Text>
+				<TouchableOpacity onPress={() => navigation.navigate('Login')}>
+					<Text style={{ color: '#f57c00', fontWeight: '600', fontSize: 14 }}>
+						{' '}
+						Log in
+					</Text>
 				</TouchableOpacity>
 			</View>
 		</LogLayout>
@@ -74,8 +77,10 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
 	title: {
 		fontSize: 36,
+		fontWeight: 'bold',
 		color: 'orange',
 		alignSelf: 'center',
+		paddingBottom: 24,
 	},
 	input: {
 		backgroundColor: '#F6F7FB',
