@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native'
+/* import { useNavigation } from '@react-navigation/native' */
 import { useState } from 'react'
 import {
 	StyleSheet,
@@ -11,7 +11,7 @@ import {
 import LogLayout from '@/components/layout/LogLayout'
 
 export default function LoginScreen() {
-	const navigation = useNavigation()
+	/* 	const navigation = useNavigation() */
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 
@@ -63,7 +63,7 @@ export default function LoginScreen() {
 				<Text style={{ color: 'gray', fontWeight: '600', fontSize: 14 }}>
 					Don't have an account?{' '}
 				</Text>
-				<TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+				<TouchableOpacity /*  onPress={() => navigation.navigate('Signup')} */>
 					<Text className='text-buttonBg text-{14} font-semibold'> Sign Up</Text>
 				</TouchableOpacity>
 			</View>

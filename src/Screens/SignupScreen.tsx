@@ -1,7 +1,6 @@
-import { useNavigation } from '@react-navigation/native'
+/* import { useNavigation } from '@react-navigation/native' */
 import { useState } from 'react'
 import {
-	Alert,
 	StyleSheet,
 	Text,
 	TextInput,
@@ -12,7 +11,7 @@ import {
 import LogLayout from '@/components/layout/LogLayout'
 
 export default function SignupScreen() {
-	const navigation = useNavigation()
+	/* 	const navigation = useNavigation() */
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [loading, setLoading] = useState(false)
@@ -63,7 +62,7 @@ export default function SignupScreen() {
 				<Text style={{ color: 'gray', fontWeight: '600', fontSize: 14 }}>
 					Don't have an account?{' '}
 				</Text>
-				<TouchableOpacity onPress={() => navigation.navigate('Login')}>
+				<TouchableOpacity /* onPress={() => navigation.navigate('Login')} */>
 					<Text style={{ color: '#f57c00', fontWeight: '600', fontSize: 14 }}>
 						{' '}
 						Log in
