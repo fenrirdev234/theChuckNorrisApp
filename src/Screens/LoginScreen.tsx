@@ -19,9 +19,7 @@ export default function LoginScreen() {
 
 	return (
 		<LogLayout>
-			<Text style={styles.title} className='text pb-[24] font-bold'>
-				Log In
-			</Text>
+			<Text style={styles.title}>Log In</Text>
 			<TextInput
 				style={styles.input}
 				placeholder='Enter email'
@@ -42,12 +40,8 @@ export default function LoginScreen() {
 				value={password}
 				onChangeText={(text) => setPassword(text)}
 			/>
-			<TouchableOpacity
-				style={styles.button}
-				className='bg-buttonBg'
-				onPress={onHandleLogin}
-			>
-				<Text className='text-button-text-color font-bold' style={{ fontSize: 18 }}>
+			<TouchableOpacity style={styles.button} onPress={onHandleLogin}>
+				<Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 18 }}>
 					{' '}
 					Log In
 				</Text>
@@ -64,7 +58,10 @@ export default function LoginScreen() {
 					Don't have an account?{' '}
 				</Text>
 				<TouchableOpacity /*  onPress={() => navigation.navigate('Signup')} */>
-					<Text className='text-buttonBg text-{14} font-semibold'> Sign Up</Text>
+					<Text style={{ color: '#f57c00', fontWeight: '600', fontSize: 14 }}>
+						{' '}
+						Sign Up
+					</Text>
 				</TouchableOpacity>
 			</View>
 		</LogLayout>
@@ -74,8 +71,10 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
 	title: {
 		fontSize: 36,
+		fontWeight: 'bold',
 		color: 'orange',
 		alignSelf: 'center',
+		paddingBottom: 24,
 	},
 	input: {
 		backgroundColor: '#F6F7FB',
@@ -85,14 +84,6 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		padding: 12,
 	},
-	backImage: {
-		width: '100%',
-		height: 340,
-		position: 'absolute',
-		top: 0,
-		resizeMode: 'cover',
-	},
-
 	button: {
 		backgroundColor: '#f57c00',
 		height: 58,

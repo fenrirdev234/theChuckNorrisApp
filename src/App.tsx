@@ -1,5 +1,4 @@
-import 'react-native-reanimated'
-import '../global.css'
+/*  import 'react-native-reanimated'*/
 
 import {
 	DarkTheme,
