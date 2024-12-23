@@ -35,7 +35,6 @@ export default function RootLayout() {
 	return (
 		<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
 			<NavigationContainer></NavigationContainer>
-			<StatusBar style='auto' />
 		</ThemeProvider>
 	)
 }
