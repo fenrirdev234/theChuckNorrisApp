@@ -1,4 +1,4 @@
-/*  import 'react-native-reanimated'*/
+import 'react-native-reanimated'
 
 import {
 	DarkTheme,
@@ -13,7 +13,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 import { useColorScheme } from '@/hooks/useColorScheme'
 
-import { NavigationApp } from './router/AppRouter'
+import { NavigationApp } from './components/navigation/AppRouter'
+import { SessionProvider } from './context/SessionProvider'
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
 
@@ -34,10 +36,12 @@ export default function App() {
 	}
 	return (
 		<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-			<SafeAreaProvider>
-				<NavigationApp />
-				<StatusBar style='auto' />
-			</SafeAreaProvider>
+			<SessionProvider>
+				<SafeAreaProvider>
+					<NavigationApp />
+					<StatusBar style='auto' />
+				</SafeAreaProvider>
+			</SessionProvider>
 		</ThemeProvider>
 	)
 }
