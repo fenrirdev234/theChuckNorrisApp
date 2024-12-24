@@ -8,7 +8,7 @@ const tintColorDark = '#fff' */
 
 export const Colors = {
 	light: {
-		bgColor: '#ece8e1',
+		bgColor: '#dbd7ce',
 		bgColor2: '#F6F7FB',
 		textDetail: 'gray',
 		cardbg: '#eeecea',

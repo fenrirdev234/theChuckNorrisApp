@@ -1,19 +1,33 @@
 import { ReactNode } from 'react'
 import { View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-export default function BasicLayout({ children }: { children: ReactNode }) {
-	const inset = useSafeAreaInsets()
+import { Colors } from '@/constants/Colors'
+import { useColorScheme } from '@/hooks/useColorScheme.web'
+
+export default function BasicLayout({
+	children,
+	isList,
+}: {
+	children: ReactNode | ReactNode[]
+	isList?: boolean
+}) {
+	const colorScheme = useColorScheme()
 	return (
 		<View
-			style={{
-				paddingBottom: inset.bottom,
-				paddingTop: inset.top,
-
-				flex: 1,
-			}}
+			style={[
+				{ flex: 1, backgroundColor: Colors[colorScheme ?? 'light'].bgColor },
+			]}
 		>
-			{children}
+			<SafeAreaView
+				style={{
+					flex: 1,
+					marginLeft: 30,
+					marginRight: isList ? 12 : 30,
+				}}
+			>
+				{children}
+			</SafeAreaView>
 		</View>
 	)
 }
