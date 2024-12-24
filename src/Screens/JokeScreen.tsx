@@ -1,9 +1,47 @@
-import { Text, View } from 'react-native'
+import { useAsyncStorage } from '@react-native-async-storage/async-storage'
+import { StaticScreenProps } from '@react-navigation/native'
+import { View } from 'react-native'
 
-export default function JokeScreen() {
+import CardJoke from '@/components/card/CardJoke'
+import BasicLayout from '@/components/layout/BasicLayout'
+import Title from '@/components/text/Title'
+import { useApi } from '@/hooks/useApi'
+import { IJoke } from '@/models/chuck.model'
+import { getJokeByCategory } from '@/services/axios.services'
+import { useFavoriteStore } from '@/store/FavoriteStore'
+type Props = StaticScreenProps<{
+	category?: string
+}>
+
+export default function JokeScreen({ route }: Props) {
+	const category = route?.params?.category
+
+	const { getItem, setItem } = useAsyncStorage('favoriteJokes')
+	const { loading, error, data } = useApi(getJokeByCategory, {
+		autoFetch: true,
+		params: category ? category : '',
+	})
+	const { addFavorite } = useFavoriteStore()
+
+	const handleSave = async (data: IJoke | null) => {
+		data && addFavorite(data)
+	}
+
 	return (
-		<View>
-			<Text>JokeScreen</Text>
-		</View>
+		<BasicLayout isList={true}>
+			<View style={{ flex: 1, paddingTop: 10 }}>
+				<Title>Facts</Title>
+				<View>
+					<CardJoke
+						joke={data?.value}
+						type={'save'}
+						category={data?.categories}
+						onPress={() => {
+							handleSave(data)
+						}}
+					/>
+				</View>
+			</View>
+		</BasicLayout>
 	)
 }
