@@ -65,7 +65,7 @@ const TabNav = () => {
 }
 
 const RootNav = () => {
-	const { user } = useSession()
+	const { user, signOut } = useSession()
 
 	return (
 		<Stack.Navigator>
