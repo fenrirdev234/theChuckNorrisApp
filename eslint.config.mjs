@@ -30,6 +30,7 @@ export default tseslint.config({
 		'react-hooks': reactHooks,
 	},
 	rules: {
+		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/no-require-imports': 'off',
 		'react/react-in-jsx-scope': 'off',
 		'react/no-unescaped-entities': 'off',
