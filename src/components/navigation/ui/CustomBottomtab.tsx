@@ -40,6 +40,8 @@ export const CustomBottomTab = ({
 				return 'tag'
 			case 'Favorite':
 				return 'star'
+			case 'Search':
+				return 'search'
 			default:
 				return 'home'
 		}

@@ -10,6 +10,7 @@ import FavoriteScreen from '@/Screens/FavoriteScreen'
 import HomeScreen from '@/Screens/HomeScreen'
 import JokeScreen from '@/Screens/JokeScreen'
 import LoginScreen from '@/Screens/LoginScreen'
+import SearchScreen from '@/Screens/SearchScreen'
 import SignupScreen from '@/Screens/SignupScreen'
 
 import CustomBottomTab from './ui/CustomBottomtab'
@@ -52,6 +53,11 @@ const TabNav = () => {
 			<Tab.Screen
 				name='Favorite'
 				component={FavoriteScreen}
+				options={{ headerShown: false }}
+			/>
+			<Tab.Screen
+				name='Search'
+				component={SearchScreen}
 				options={{ headerShown: false }}
 			/>
 		</Tab.Navigator>

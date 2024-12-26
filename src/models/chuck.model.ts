@@ -25,7 +25,7 @@ export interface IJokeBySearch {
 	result: Result[]
 }
 
-interface Result {
+export interface Result {
 	categories: string[]
 	created_at: string
 	icon_url: string
