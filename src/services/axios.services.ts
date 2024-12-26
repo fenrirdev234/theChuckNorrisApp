@@ -6,7 +6,7 @@ import { loadAbort } from '@/utils/loadAbort.utils'
 
 import { API_ENDPOINTS } from './endpoints'
 
-const chuckAxios = axios.create({
+export const chuckAxios = axios.create({
 	baseURL: 'https://api.chucknorris.io/',
 	timeout: 150000000,
 	headers: {

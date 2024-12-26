@@ -7,7 +7,6 @@ import Toast from 'react-native-toast-message'
 import ControllerInput from '@/components/form/ControllerInput'
 import FormButtom from '@/components/form/FormButtom'
 import LogLayout from '@/components/layout/LogLayout'
-/* import { firebaseAuth } from '@/config/firebase' */
 import { commonColor } from '@/constants/Colors'
 import { useSession } from '@/context/SessionProvider'
 import { scheduleTodoNotification } from '@/lib/expo/Notification'
@@ -49,9 +48,9 @@ export default function LoginScreen() {
 	}) => {
 		try {
 			await signIn(email, password)
+
 			scheduleTodoNotification()
 			reset()
-			navigation.navigate('Home')
 		} catch (err) {
 			console.log('[handleLogin] ==>', err)
 			return null

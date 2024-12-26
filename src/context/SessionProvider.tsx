@@ -54,6 +54,7 @@ export function SessionProvider(props: { children: React.ReactNode }) {
 			return response?.user
 		} catch (error) {
 			console.error('[handleSignIn error] ==>', error)
+			throw error
 			return undefined
 		}
 	}
@@ -68,6 +69,7 @@ export function SessionProvider(props: { children: React.ReactNode }) {
 			return response?.user
 		} catch (error) {
 			console.error('[handleSignUp error] ==>', error)
+			throw error
 			return undefined
 		}
 	}
@@ -87,6 +89,7 @@ export function SessionProvider(props: { children: React.ReactNode }) {
 				signIn: handleSignIn,
 				signUp: handleSignUp,
 				signOut: handleSignOut,
+
 				user,
 				isLoading,
 			}}

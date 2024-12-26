@@ -1,7 +1,8 @@
-import { IJoke } from '@/models/chuck.model'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { create } from 'zustand'
-import { persist, createJSONStorage } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
+
+import { IJoke } from '@/models/chuck.model'
 
 type IFavoriteStore = {
 	favorite: IJoke[]

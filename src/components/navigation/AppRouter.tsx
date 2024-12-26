@@ -1,7 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createStaticNavigation } from '@react-navigation/native'
+import {
+	createStaticNavigation,
+	NavigationContainer,
+} from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import { useSession } from '@/context/SessionProvider'
 import FavoriteScreen from '@/Screens/FavoriteScreen'
 import HomeScreen from '@/Screens/HomeScreen'
 import JokeScreen from '@/Screens/JokeScreen'
@@ -28,5 +32,65 @@ const RootStack = createNativeStackNavigator({
 		Signup: { screen: SignupScreen, options: { headerShown: false } },
 	},
 })
-
 export const NavigationApp = createStaticNavigation(RootStack)
+const Tab = createBottomTabNavigator()
+const Stack = createNativeStackNavigator()
+
+const TabNav = () => {
+	return (
+		<Tab.Navigator tabBar={(props) => <CustomBottomTab {...props} />}>
+			<Tab.Screen
+				name='Home'
+				component={HomeScreen}
+				options={{ headerShown: false }}
+			/>
+			<Tab.Screen
+				name='Joke'
+				component={JokeScreen}
+				options={{ headerShown: false }}
+			/>
+			<Tab.Screen
+				name='Favorite'
+				component={FavoriteScreen}
+				options={{ headerShown: false }}
+			/>
+		</Tab.Navigator>
+	)
+}
+
+const RootNav = () => {
+	const { user } = useSession()
+
+	return (
+		<Stack.Navigator>
+			{user ? (
+				<Stack.Screen
+					name='HomeTabs'
+					component={TabNav}
+					options={{ headerShown: false }}
+				/>
+			) : (
+				<>
+					<Stack.Screen
+						name='Login'
+						component={LoginScreen}
+						options={{ headerShown: false }}
+					/>
+					<Stack.Screen
+						name='Signup'
+						component={SignupScreen}
+						options={{ headerShown: false }}
+					/>
+				</>
+			)}
+		</Stack.Navigator>
+	)
+}
+
+export const NavigationRouter = () => {
+	return (
+		<NavigationContainer>
+			<RootNav />
+		</NavigationContainer>
+	)
+}

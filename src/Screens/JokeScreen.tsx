@@ -1,4 +1,3 @@
-import { useAsyncStorage } from '@react-native-async-storage/async-storage'
 import { StaticScreenProps } from '@react-navigation/native'
 import { View } from 'react-native'
 
@@ -10,13 +9,12 @@ import { IJoke } from '@/models/chuck.model'
 import { getJokeByCategory } from '@/services/axios.services'
 import { useFavoriteStore } from '@/store/FavoriteStore'
 type Props = StaticScreenProps<{
-	category?: string
+	category: string
 }>
 
 export default function JokeScreen({ route }: Props) {
-	const category = route?.params?.category
+	const { category } = route.params
 
-	const { getItem, setItem } = useAsyncStorage('favoriteJokes')
 	const { loading, error, data } = useApi(getJokeByCategory, {
 		autoFetch: true,
 		params: category ? category : '',
@@ -24,7 +22,9 @@ export default function JokeScreen({ route }: Props) {
 	const { addFavorite } = useFavoriteStore()
 
 	const handleSave = async (data: IJoke | null) => {
-		data && addFavorite(data)
+		if (data) {
+			addFavorite(data)
+		}
 	}
 
 	return (

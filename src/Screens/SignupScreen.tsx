@@ -64,8 +64,8 @@ export default function SignupScreen() {
 		try {
 			await signUp(email, password, name)
 			scheduleTodoNotification()
+
 			reset()
-			navigation.navigate('Home')
 		} catch (err) {
 			console.log('[handleRegister] ==>', err)
 		}
@@ -80,7 +80,6 @@ export default function SignupScreen() {
 				placeholder='Enter Name'
 				autoCapitalize='none'
 				autoCorrect={false}
-				secureTextEntry={true}
 				textContentType='name'
 				name={'name'}
 			/>

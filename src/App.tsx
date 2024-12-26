@@ -17,7 +17,7 @@ import Toast from 'react-native-toast-message'
 
 import { useColorScheme } from '@/hooks/useColorScheme'
 
-import { NavigationApp } from './components/navigation/AppRouter'
+import { NavigationRouter } from './components/navigation/AppRouter'
 import { SessionProvider } from './context/SessionProvider'
 import { registerForPushNotificationsAsync } from './lib/expo/Notification'
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -26,7 +26,7 @@ SplashScreen.preventAutoHideAsync()
 Notifications.setNotificationHandler({
 	handleNotification: async () => ({
 		shouldShowAlert: true,
-		shouldPlaySound: true,
+		shouldPlaySound: false,
 		shouldSetBadge: true,
 	}),
 })
@@ -101,7 +101,7 @@ export default function App() {
 		<ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
 			<SessionProvider>
 				<SafeAreaProvider>
-					<NavigationApp />
+					<NavigationRouter />
 					<Toast />
 					<StatusBar style='auto' />
 				</SafeAreaProvider>

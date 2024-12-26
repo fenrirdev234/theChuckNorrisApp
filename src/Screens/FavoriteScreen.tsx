@@ -3,9 +3,9 @@ import { FlatList, Text, View } from 'react-native'
 import CardJoke from '@/components/card/CardJoke'
 import Title from '@/components/text/Title'
 import { commonColor } from '@/constants/Colors'
+import { useFavoriteStore } from '@/store/FavoriteStore'
 
 import BasicLayout from '../components/layout/BasicLayout'
-import { useFavoriteStore } from '@/store/FavoriteStore'
 
 export default function FavoriteScreen() {
 	const { favorite, removeFavorite } = useFavoriteStore()
