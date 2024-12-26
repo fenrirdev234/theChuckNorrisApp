@@ -15,12 +15,13 @@ export default function FavoriteScreen() {
 	}
 
 	return (
-		<BasicLayout isList={true}>
+		<BasicLayout>
 			<View style={{ flex: 1, paddingTop: 10 }}>
 				<Title>Favorite</Title>
 				<View>
 					{favorite.length > 0 ? (
 						<FlatList
+							style={{ marginBottom: 150 }}
 							contentContainerStyle={{ gap: 12 }}
 							data={favorite}
 							renderItem={({ item }) => (

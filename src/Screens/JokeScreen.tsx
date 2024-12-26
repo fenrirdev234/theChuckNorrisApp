@@ -13,7 +13,7 @@ type Props = StaticScreenProps<{
 }>
 
 export default function JokeScreen({ route }: Props) {
-	const { category } = route.params
+	const category = route?.params?.category
 
 	const { loading, error, data } = useApi(getJokeByCategory, {
 		autoFetch: true,
@@ -28,7 +28,7 @@ export default function JokeScreen({ route }: Props) {
 	}
 
 	return (
-		<BasicLayout isList={true}>
+		<BasicLayout>
 			<View style={{ flex: 1, paddingTop: 10 }}>
 				<Title>Facts</Title>
 				<View>

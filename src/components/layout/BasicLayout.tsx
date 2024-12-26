@@ -7,10 +7,8 @@ import { useColorScheme } from '@/hooks/useColorScheme.web'
 
 export default function BasicLayout({
 	children,
-	isList,
 }: {
 	children: ReactNode | ReactNode[]
-	isList?: boolean
 }) {
 	const colorScheme = useColorScheme()
 	return (
@@ -23,7 +21,7 @@ export default function BasicLayout({
 				style={{
 					flex: 1,
 					marginLeft: 30,
-					marginRight: isList ? 12 : 30,
+					marginRight: 20,
 				}}
 			>
 				{children}
