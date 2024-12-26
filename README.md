@@ -55,8 +55,6 @@ The environment variables are located in the `.env` file. The following environm
 
 ## Screenshots
 
-![Screenshot 1](./public/screen-1.png)
-
 - `/Login`: You can login
 
 ![/Login](./doc/login.png)
