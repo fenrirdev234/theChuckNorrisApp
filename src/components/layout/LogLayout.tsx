@@ -1,18 +1,27 @@
 import { ReactNode } from 'react'
-import { StatusBar, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+
+import { Colors } from '@/constants/Colors'
+import { useColorScheme } from '@/hooks/useColorScheme.web'
 
 export default function LogLayout({
 	children,
 }: {
 	children: ReactNode | ReactNode[]
 }) {
+	const colorScheme = useColorScheme()
+
 	return (
-		<View style={styles.container}>
+		<View
+			style={[
+				styles.container,
+				{ backgroundColor: Colors[colorScheme ?? 'light'].bgColor },
+			]}
+		>
 			{/*  <Image source={} style={styles.backImage} />
  <View style={styles.whiteSheet} /> */}
-			<SafeAreaView style={styles.form}>{children}</SafeAreaView>
-			<StatusBar barStyle='light-content' />
+			<SafeAreaView style={[styles.form]}>{children}</SafeAreaView>
 		</View>
 	)
 }
@@ -20,7 +29,6 @@ export default function LogLayout({
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
 	},
 	backImage: {
 		width: '100%',

@@ -1,51 +1,86 @@
-/* import { useNavigation } from '@react-navigation/native' */
-import { useState } from 'react'
-import {
-	StyleSheet,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	View,
-} from 'react-native'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigation } from '@react-navigation/native'
+import { FieldErrors, SubmitHandler, useForm } from 'react-hook-form'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import Toast from 'react-native-toast-message'
 
+import ControllerInput from '@/components/form/ControllerInput'
+import FormButtom from '@/components/form/FormButtom'
 import LogLayout from '@/components/layout/LogLayout'
+/* import { firebaseAuth } from '@/config/firebase' */
+import { commonColor } from '@/constants/Colors'
+import { useSession } from '@/context/SessionProvider'
+import { scheduleTodoNotification } from '@/lib/expo/Notification'
+import { ILoginFormValue, loginSchema } from '@/models/log.model'
 
 export default function LoginScreen() {
-	/* 	const navigation = useNavigation() */
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
+	const navigation = useNavigation()
+	const { signIn } = useSession()
 
-	const onHandleLogin = () => {}
+	const { reset, control, handleSubmit } = useForm<ILoginFormValue>({
+		resolver: zodResolver(loginSchema),
+		defaultValues: {
+			password: '',
+			email: '',
+		},
+		mode: 'onSubmit',
+	})
+
+	const onError = (error: FieldErrors<ILoginFormValue>) => {
+		if (error.email) {
+			Toast.show({
+				type: 'error',
+				text1: `Error email: ${error.email.type}`,
+				text2: error.email.message,
+			})
+			if (error.password) {
+				Toast.show({
+					type: 'error',
+					text1: `Error password: ${error.password.type}`,
+					text2: error.password.message,
+				})
+			}
+		}
+	}
+
+	const onHandleLogin: SubmitHandler<ILoginFormValue> = async ({
+		email,
+		password,
+	}) => {
+		try {
+			await signIn(email, password)
+			scheduleTodoNotification()
+			reset()
+			navigation.navigate('Home')
+		} catch (err) {
+			console.log('[handleLogin] ==>', err)
+			return null
+		}
+	}
 
 	return (
 		<LogLayout>
-			<Text style={styles.title}>Log In</Text>
-			<TextInput
-				style={styles.input}
+			<Text style={[styles.title, { color: commonColor.title }]}>Log In</Text>
+			<ControllerInput
+				control={control}
 				placeholder='Enter email'
 				autoCapitalize='none'
 				keyboardType='email-address'
 				textContentType='emailAddress'
 				autoFocus={true}
-				value={email}
-				onChangeText={(text) => setEmail(text)}
+				name='email'
 			/>
-			<TextInput
-				style={styles.input}
+			<ControllerInput
+				control={control}
 				placeholder='Enter password'
 				autoCapitalize='none'
 				autoCorrect={false}
 				secureTextEntry={true}
 				textContentType='password'
-				value={password}
-				onChangeText={(text) => setPassword(text)}
+				name='password'
 			/>
-			<TouchableOpacity style={styles.button} onPress={onHandleLogin}>
-				<Text style={{ fontWeight: 'bold', color: '#fff', fontSize: 18 }}>
-					{' '}
-					Log In
-				</Text>
-			</TouchableOpacity>
+
+			<FormButtom title='Log in' onPress={handleSubmit(onHandleLogin, onError)} />
 			<View
 				style={{
 					marginTop: 20,
@@ -55,10 +90,12 @@ export default function LoginScreen() {
 				}}
 			>
 				<Text style={{ color: 'gray', fontWeight: '600', fontSize: 14 }}>
-					Don't have an account?{' '}
+					Don't you have an account?
 				</Text>
-				<TouchableOpacity /*  onPress={() => navigation.navigate('Signup')} */>
-					<Text style={{ color: '#f57c00', fontWeight: '600', fontSize: 14 }}>
+				<TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+					<Text
+						style={{ color: commonColor.buttonbg, fontWeight: '600', fontSize: 14 }}
+					>
 						{' '}
 						Sign Up
 					</Text>
@@ -76,16 +113,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
 		paddingBottom: 24,
 	},
-	input: {
-		backgroundColor: '#F6F7FB',
-		height: 58,
-		marginBottom: 20,
-		fontSize: 16,
-		borderRadius: 10,
-		padding: 12,
-	},
 	button: {
-		backgroundColor: '#f57c00',
 		height: 58,
 		borderRadius: 10,
 		justifyContent: 'center',
