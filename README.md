@@ -17,6 +17,10 @@
 
 This project is a technical test for a React Native Developer position.
 
+The main project is currently on the main branch.
+
+And n the 'development-fix-animate-navbar' branch, there's a test version of the improved navbar if you want to check it out. It fixes the bug of the tab change caused by an internal link; the change is now made by updating a variable instead of triggering an event.
+
 ## Requirements
 
 - Node: v20.16.0
