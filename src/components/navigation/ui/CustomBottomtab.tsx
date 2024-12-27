@@ -1,4 +1,5 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
+import { useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import Animated, {
 	runOnJS,
@@ -32,6 +33,7 @@ export const CustomBottomTab = ({
 		circleXCoordinate.value = getPathXCenter(currentPath)
 	}
 	const colorScheme = useColorScheme()
+
 	const selectIcon = (routeName: string) => {
 		switch (routeName) {
 			case 'Home':
@@ -60,8 +62,16 @@ export const CustomBottomTab = ({
 
 	const handleTabPress = (index: number, tab: string) => {
 		navigation.navigate(tab)
-		progress.value = withTiming(index)
+		/* progress.value = withTiming(index) */
 	}
+
+	useEffect(() => {
+		const index = navigation.getState()?.index
+
+		if (typeof index === 'number') {
+			progress.value = withTiming(index + 1)
+		}
+	}, [progress, navigation.getState().index])
 
 	return (
 		<View style={styles.tabBarContainer}>
